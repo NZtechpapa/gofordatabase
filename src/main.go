@@ -2,9 +2,10 @@ package main
 
 //  import the mssql and xorm
 import (
+    //  "./config"
     "bufio"
     "fmt"
-    "github.com/go-xorm/xorm"
+    // "github.com/go-xorm/xorm"
     "github.com/json-iterator/go"
     "os"
     "strings"
@@ -27,7 +28,22 @@ func main() {
         split1 := scanner.Text()
         split := strings.Index(split1, "{")
         arefun := split1[split : len(scanner.Text())-1]
-        fmt.Println(arefun)
+
+        //   fmt.Println(arefun)
+        arfun1 := "[" + arefun + "]"
+        //fmt.Println(arfun1)
+        //  fmt.Println("\n")
+        var json = jsoniter.ConfigCompatibleWithStandardLibrary
+        // fmt.Println(json.Valid([]byte(arefun)))
+        //  fmt.Println("\n")
+        var table1 []barfoottable1
+        err := json.Unmarshal([]byte(arfun1), &table1)
+        // err := json.Unmarshal(arefun, &table1)
+        if err != nil {
+            fmt.Println("error:", err)
+        }
+        //  fmt.Printf("%+v", table1)
+        fmt.Printf("%+v", table1[0].DVRValuationImprovement)
         fmt.Println("\n")
 
     }
@@ -35,9 +51,5 @@ func main() {
     if err := scanner.Err(); err != nil {
         fmt.Println(err)
     }
-
-    var json = jsoniter.ConfigCompatibleWithStandardLibrary
-
-    json.Marshal(&jsonFile)
 
 }

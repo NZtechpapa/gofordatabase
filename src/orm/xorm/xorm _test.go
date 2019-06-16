@@ -1,5 +1,5 @@
 //package mssqlxorm
-package main
+package xorm_test
 
 //import "../../config"
 
