@@ -1,11 +1,5 @@
 package dbmanagers
 
-/*
-	mandatory moment
-	package "github.com/denisenkom/go-mssqldb" should be exists in import section
-	without it. it will not be possible to do request to DB
-*/
-
 import (
 	"../models"
 	_ "github.com/denisenkom/go-mssqldb"
@@ -41,13 +35,13 @@ func InitDB(isShowSQL bool) {
 	orm := getOrm()
 	defer orm.Close()
 	isShowSQLCode = isShowSQL
-	err := orm.Sync2(new(models.Customer))
+	err := orm.Sync2(new(models.Barfoottable1))
 	checkErr(err, "Sync structures with DB was failed")
 }
 
 // Get list of customers
-func GetCustomers() []models.Customer {
-	var customers []models.Customer
+func GetCustomers() []models.Barfoottable1 {
+	var customers []models.Barfoottable1
 
 	orm := getOrm()
 	defer orm.Close()
@@ -59,23 +53,23 @@ func GetCustomers() []models.Customer {
 }
 
 // Update Customer
-func UpdateCustomer(customer models.Customer) bool {
+func UpdateCustomer(customer models.Barfoottable1) bool {
 
 	orm := getOrm()
 	defer orm.Close()
 
-	affected, err := orm.Id(customer.Id).Update(&customer)
+	affected, err := orm.Id(customer.ID).Update(&customer)
 	checkErr(err, "Update was failed")
 
 	return affected > 0
 }
 
 // Insert Customer
-func InsertCustomer(customer models.Customer) bool {
+func InsertCustomer(customer models.Barfoottable1) bool {
 
-	if (models.Customer{}) == customer {
-		return false
-	}
+	//	if (models.Barfoottable1{}) == customer {
+	//		return false
+	//	}
 
 	orm := getOrm()
 	defer orm.Close()
@@ -87,16 +81,16 @@ func InsertCustomer(customer models.Customer) bool {
 }
 
 // Delete Customer
-func DeleteCustomer(customer models.Customer) bool {
+func DeleteCustomer(customer models.Barfoottable1) bool {
 
-	if (models.Customer{}) == customer {
-		return false
-	}
+	//	if (models.Barfoottable1{}) == customer {
+	//		return false
+	//	}
 
 	orm := getOrm()
 	defer orm.Close()
 
-	affected, err := orm.Id(customer.Id).Delete(&customer)
+	affected, err := orm.Id(customer.ID).Delete(&customer)
 	checkErr(err, "Delete was failed")
 
 	return affected > 0

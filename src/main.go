@@ -2,7 +2,8 @@ package main
 
 //  import the mssql and xorm
 import (
-    //  "./config"
+    "./orm/xorm"
+    "./orm/xorm/models"
     "bufio"
     "fmt"
     // "github.com/go-xorm/xorm"
@@ -13,8 +14,10 @@ import (
 
 func main() {
 
+    // init the dataset
+    xormcode.Xorm_init()
     // Open our jsonFile
-    jsonFile, err := os.Open("../testdataset/testdata.json")
+    jsonFile, err := os.Open("../testdataset/testdata1.json")
     // if we os.Open returns an error then handle it
     if err != nil {
         fmt.Println(err)
@@ -36,7 +39,7 @@ func main() {
         var json = jsoniter.ConfigCompatibleWithStandardLibrary
         // fmt.Println(json.Valid([]byte(arefun)))
         //  fmt.Println("\n")
-        var table1 []barfoottable1
+        var table1 []models.Barfoottable1
         err := json.Unmarshal([]byte(arfun1), &table1)
         // err := json.Unmarshal(arefun, &table1)
         if err != nil {
@@ -45,7 +48,7 @@ func main() {
         //  fmt.Printf("%+v", table1)
         fmt.Printf("%+v", table1[0].DVRValuationImprovement)
         fmt.Println("\n")
-
+        xormcode.Xorm_insert(table1[0])
     }
 
     if err := scanner.Err(); err != nil {

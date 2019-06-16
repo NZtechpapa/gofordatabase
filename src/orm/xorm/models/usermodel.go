@@ -4,18 +4,10 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"strconv"
+	//	"strconv"
 )
 
-type Customer struct {
-	Id        int    `xorm:"ID PK int autoincr"`
-	Nick      string `xorm:"Nick varchar(100) notnull"`
-	Email     string `xorm:"Email varchar(100) notnull"`
-	Firstname string `xorm:"Firstname varchar(100)"`
-	Lastname  string `xorm:"Lastname varchar(100)"`
-	Age       int    `xorm:"Age int default 0"`
-}
-type barfoottable1 struct {
+type Barfoottable1 struct {
 	ID    int    `xorm:"ID PK int autoincr"`
 	Held  bool   `json:"Held"`
 	Unit  string `json:"Unit"`
@@ -28,7 +20,7 @@ type barfoottable1 struct {
 	RafID                   int     `json:"RafID"`
 	TlaID                   int     `json:"TlaId"`
 	Images                  string  `json:"Images"`
-	SaleID                  int     `json:"SaleID"`
+	SaleID                  int     `json:"SaleID"  xorm:"SaleID int default 0"`
 	Street                  string  `json:"Street"`
 	Suffix                  string  `json:"Suffix"`
 	Tenure                  string  `json:"Tenure"`
@@ -77,23 +69,16 @@ type barfoottable1 struct {
 	DVRValuationImprovement float64 `json:"DVR_ValuationImprovement"`
 }
 
-func (customer *Customer) ToString() string {
+func (barfoottable *Barfoottable1) ToString() string {
 
 	var buffer bytes.Buffer
 	buffer.WriteString("------- User --------")
-	buffer.WriteString("\n Id : " + strconv.Itoa(customer.Id))
-	buffer.WriteString("\n Nick : " + customer.Nick)
-	buffer.WriteString("\n Email : " + customer.Email)
-	buffer.WriteString("\n Firstname : " + customer.Firstname)
-	buffer.WriteString("\n Lastname : " + customer.Lastname)
-	buffer.WriteString("\n Age : " + strconv.Itoa(customer.Age))
-	buffer.WriteString("\n---------------------\n")
 
 	return buffer.String()
 }
 
-func (customer *Customer) ToJson() string {
-	result, err := json.Marshal(customer)
+func (barfoottable *Barfoottable1) ToJson() string {
+	result, err := json.Marshal(barfoottable)
 	if err != nil {
 		fmt.Println(err)
 		return err.Error()
