@@ -9,67 +9,64 @@ const (
     database = "barfootDB"
 )
 
-type User struct {
-    ID                       uint
-    IndexID                  string //  2121212
-    Heldbool                 bool   // false
-    UnitID                   string //  1212
-    OwnerSurname1            string //Jordan
-    OwnerType1               int    // Individual
-    OtherNames1              string //Angela Lynn
-    CorporateName1           string //  ""
-    OwnerSurname2            string //Jordan
-    OwnerType2               int    // Individual
-    OtherNames2              string //Angela Lynn
-    CorporateName2           string //  ""
-    RafID                    bigint //  1864011
-    TlaId                    bigint // 5
-    Images                   string // http://media-archive.realestate.co.nz/listings/1285127/9f33292e37a00e4072f956ac961db3c4
-    SaleID                   bigint // 5
-    Street                   string // Stredwick Drive
-    Suffix                   string
-    Tenure                   string
-    ValRef                   string
-    WardId                   bigint
-    Garages                  int
-    TlaName                  string
-    Bedrooms                 int
-    Category                 string
-    LandArea                 int
-    Latitude                 float64
-    ListDate                 time
-    Postcode                 int
-    RegionId                 int
-    SaleAsIs                 bool
-    SaleDate                 time
-    SellDays                 int
-    SuburbId                 int
-    TownCity                 string
-    WardName                 string
-    Bathrooms                int
-    FloorArea                float32
-    LandValue                float64
-    ListPrice                float64
-    ListingID                bigint  // 1285127
-    Longitude                float64 // 174.7392
-    SalePrice                float64 //382000
-    Valuation                float64 //0
-    ExternalId               string  //LEG-123607
-    StreetNumber             string  //  120
-    RegionName               string  // Auckland Region
-    SuburbName               string  // torbay
-    Suppressed               bool    // false
-    SaleMethod               int     //     P - Private Treaty(Neg.)
-    CreatedDate              date    // 2004-09-13
-    Garages_DVR              int     // 1
-    DVR_LandValue            float32 //690000.0
-    DVR_Valuation            float32 //690000.0
-    IsNewDwelling            bool
-    ValuationDate            date    //  null
-    SettlementDate           date    //  2004-09-13
-    LastUpdatedDate          date    // 2004-08-06
-    LastChangeDate           date    // 2019-02-19
-    DVR_ValuationDate        date    //7/2017
-    ValuationImprovement     float32 //0
-    DVR_ValuationImprovement float64 // 410000.0
+type barfoottable1 struct {
+    ID    int
+    Held  bool   `json:"Held"`
+    Unit  string `json:"Unit"`
+    Owner []struct {
+        Surname       string `json:"Surname"`
+        OwnerType     string `json:"OwnerType"`
+        OtherNames    string `json:"OtherNames"`
+        CorporateName string `json:"CorporateName"`
+    } `json:"Owner"`
+    RafID                   int     `json:"RafID"`
+    TlaID                   int     `json:"TlaId"`
+    Images                  string  `json:"Images"`
+    SaleID                  int     `json:"SaleID"`
+    Street                  string  `json:"Street"`
+    Suffix                  string  `json:"Suffix"`
+    Tenure                  string  `json:"Tenure"`
+    ValRef                  string  `json:"ValRef"`
+    WardID                  int     `json:"WardId"`
+    Garages                 int     `json:"Garages"`
+    TlaName                 string  `json:"TlaName"`
+    Bedrooms                int     `json:"Bedrooms"`
+    Category                string  `json:"Category"`
+    LandArea                int     `json:"LandArea"`
+    Latitude                string  `json:"Latitude"`
+    ListDate                string  `json:"ListDate"`
+    Postcode                string  `json:"Postcode"`
+    RegionID                int     `json:"RegionId"`
+    SaleAsIs                bool    `json:"SaleAsIs"`
+    SaleDate                string  `json:"SaleDate"`
+    SellDays                int     `json:"SellDays"`
+    SuburbID                int     `json:"SuburbId"`
+    TownCity                string  `json:"TownCity"`
+    WardName                string  `json:"WardName"`
+    Bathrooms               int     `json:"Bathrooms"`
+    FloorArea               int     `json:"FloorArea"`
+    LandValue               int     `json:"LandValue"`
+    ListPrice               int     `json:"ListPrice"`
+    ListingID               int     `json:"ListingID"`
+    Longitude               string  `json:"Longitude"`
+    SalePrice               int     `json:"SalePrice"`
+    Valuation               int     `json:"Valuation"`
+    ExternalID              string  `json:"ExternalId"`
+    RegionName              string  `json:"RegionName"`
+    SaleMethod              string  `json:"SaleMethod"`
+    SuburbName              string  `json:"SuburbName"`
+    Suppressed              bool    `json:"Suppressed"`
+    CreatedDate             string  `json:"CreatedDate"`
+    GaragesDVR              int     `json:"Garages-DVR"`
+    StreetNumber            string  `json:"StreetNumber"`
+    DVRLandValue            float64 `json:"DVR_LandValue"`
+    DVRValuation            float64 `json:"DVR_Valuation"`
+    IsNewDwelling           bool    `json:"IsNewDwelling"`
+    ValuationDate           string  `json:"ValuationDate"`
+    LastChangeDate          string  `json:"LastChangeDate"`
+    SettlementDate          string  `json:"SettlementDate"`
+    LastUpdatedDate         string  `json:"LastUpdatedDate"`
+    DVRValuationDate        string  `json:"DVR_ValuationDate"`
+    ValuationImprovement    int     `json:"ValuationImprovement"`
+    DVRValuationImprovement float64 `json:"DVR_ValuationImprovement"`
 }
